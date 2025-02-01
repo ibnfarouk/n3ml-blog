@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('content');
             $table->string('photo')->nullable();
             $table->dateTime('published_at')->nullable();
-            $table->foreignId('category_id')->constrained()->onDelete('set null');
+            $table->foreignId('category_id')->constrained()->onDelete('no action');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
         });
     }

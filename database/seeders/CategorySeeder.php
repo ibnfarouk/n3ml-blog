@@ -12,6 +12,7 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        // Create 10 categories
+        \App\Models\Category::factory(10)->create();
     }
 }

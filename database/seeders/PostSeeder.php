@@ -12,6 +12,7 @@ class PostSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        // Create 10 posts
+        \App\Models\Post::factory(10)->create();
     }
 }
