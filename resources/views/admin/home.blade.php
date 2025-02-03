@@ -5,5 +5,7 @@
 @endsection
 
 @section('content')
-    <h3>Test</h3>
+    <h3>Dashboard</h3>
 @endsection
+
+
