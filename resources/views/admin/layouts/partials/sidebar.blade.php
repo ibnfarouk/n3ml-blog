@@ -35,9 +35,15 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{url('admin/categories')}}" class="nav-link">
+                    <a href="{{url('admin/categories')}}" class="nav-link ">
                         <i class="nav-icon bi bi-palette"></i>
                         <p>Categories</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{url('admin/tags')}}" class="nav-link  ">
+                        <i class="nav-icon bi bi-palette"></i>
+                        <p>Tags</p>
                     </a>
                 </li>
                 <li class="nav-item">

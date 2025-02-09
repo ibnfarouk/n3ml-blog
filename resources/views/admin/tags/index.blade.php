@@ -1,12 +1,12 @@
 @extends('admin.layouts.app')
 
-@section('page_title', 'Categories')
+@section('page_title', 'Tags')
 
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">List of Categories</h3>
-            <a href="{{ route('admin.categories.create') }}" class="btn btn-primary float-end">Create</a>
+            <h3 class="card-title">List of Tags</h3>
+            <a href="{{ route('admin.tags.create') }}" class="btn btn-primary float-end">Create</a>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
@@ -19,18 +19,18 @@
                 </tr>
                 </thead>
                 <tbody>
-                @forelse($categories as $category)
+                @forelse($tags as $tag)
                     <tr>
                         {{--                        (current page - 1 ) * per page + iteration --}}
-                        <td>{{ ((request('page',1) - 1 ) * $categories->perPage()) + $loop->iteration }}</td>
-                        <td>{{ $category->name }}</td>
+                        <td>{{ ((request('page',1) - 1 ) * $tags->perPage()) + $loop->iteration }}</td>
+                        <td>{{ $tag->name }}</td>
                         <td>
 
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="3">No categories found</td>
+                        <td colspan="3">No tags found</td>
                     </tr>
                 @endforelse
                 </tbody>
@@ -38,7 +38,7 @@
         </div>
         <!-- /.card-body -->
         <div class="card-footer clearfix">
-            {{ $categories->links() }}
+            {{ $tags->links() }}
         </div>
     </div>
     <!-- /.card -->
