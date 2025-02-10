@@ -41,6 +41,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{url('admin/tags')}}" class="nav-link">
+                        <i class="nav-icon bi bi-palette"></i>
+                        <p>Tags</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{url('admin/bloggers')}}" class="nav-link">
                         <i class="nav-icon bi bi-palette"></i>
                         <p>Bloggers</p>
