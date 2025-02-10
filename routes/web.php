@@ -23,7 +23,7 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'admin'], function (){
     Auth::routes();
-    Route::group(['as' => 'admin.'], function (){
+    Route::group(['as' => 'admin.', 'middleware' => ['auth', 'is-admin']], function (){
         Route::get('/home', [HomeController::class, 'index'])->name('home');
         Route::resource('categories', CategoryController::class);
     });

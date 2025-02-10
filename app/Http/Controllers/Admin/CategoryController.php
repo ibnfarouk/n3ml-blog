@@ -14,7 +14,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::paginate();
+        $categories = Category::latest()->paginate();
         return view('admin.categories.index', compact('categories'));
     }
 
@@ -32,7 +32,7 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request)
     {
         Category::create($request->validated());
-        return redirect()->route('categories.index')->with('success', __('messages.category_created'));
+        return redirect()->route('admin.categories.index')->with('success', __('messages.category_created'));
     }
 
     /**
@@ -59,7 +59,7 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
         $category->update($request->validated());
-        return redirect()->route('categories.index')->with('success',__('messages.category_updated'));
+        return redirect()->route('admin.categories.index')->with('success',__('messages.category_updated'));
     }
 
     /**
@@ -69,9 +69,15 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
         if ($category->posts()->count()){
-            return redirect()->back()->with('error', __('messages.category_cannot_delete'));
+            return response()->json([
+                'status' => 'error',
+                'message' => __('messages.category_cannot_delete')
+            ]);
         }
         $category->delete();
-        return redirect()->route('categories.index')->with('success', __('messages.category_deleted'));
+        return response()->json([
+            'status' => 'success',
+            'message' => __('messages.category_deleted')
+        ]);
     }
 }
