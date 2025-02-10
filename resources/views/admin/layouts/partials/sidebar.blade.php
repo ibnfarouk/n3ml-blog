@@ -41,6 +41,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{url('admin/bloggers')}}" class="nav-link">
+                        <i class="nav-icon bi bi-palette"></i>
+                        <p>Bloggers</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="#" class="nav-link active">
                         <i class="nav-icon bi bi-speedometer"></i>
                         <p>

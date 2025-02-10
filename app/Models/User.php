@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\UserRoleEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
@@ -59,5 +60,17 @@ class User extends Authenticatable
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
+    }
+
+
+    // scopes
+    public function scopeOfBloggers($query)
+    {
+        return $query->where('role', UserRoleEnum::BLOGGER->value);
+    }
+
+    public function scopeOfAdmins($query)
+    {
+        return $query->where('role', UserRoleEnum::ADMIN->value);
     }
 }

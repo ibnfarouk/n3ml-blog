@@ -21,6 +21,7 @@ class PostFactory extends Factory
             'content' => $this->faker->paragraph,
             'category_id' => \App\Models\Category::factory(),
             'user_id' => \App\Models\User::factory(),
+            'published_at' => now(),
         ];
     }
 }

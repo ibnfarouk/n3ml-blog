@@ -8,12 +8,18 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Support\Str;
 
 class Post extends Model
 {
     use HasFactory;
 
     protected $fillable = ['title', 'content', 'category_id', 'user_id', 'photo'];
+
+    // casts
+    protected $casts = [
+        'published_at' => 'datetime',
+    ];
 
     public function category(): BelongsTo
     {
@@ -38,5 +44,17 @@ class Post extends Model
     public function favourites(): MorphToMany
     {
         return $this->morphedByMany(User::class, 'postable');
+    }
+
+    // attributes
+    public function getSubTitleAttribute(): string
+    {
+        return Str::words($this->content, 7, '...');
+    }
+
+    // scopes
+    public function scopeOfPublished()
+    {
+        return $this->where('published_at', '<=', now());
     }
 }

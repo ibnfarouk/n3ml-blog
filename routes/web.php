@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\BloggerController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Website\HomeController as WebsiteHomeController;
+use App\Http\Controllers\Website\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,10 +17,11 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['as' => 'website.'], function (){
+    Route::get('/', [WebsiteHomeController::class, 'home'])->name('home');
+    Route::resource('posts', PostController::class)->except('index');
 });
+
 
 
 
@@ -26,6 +30,8 @@ Route::group(['prefix' => 'admin'], function (){
     Route::group(['as' => 'admin.', 'middleware' => ['auth', 'is-admin']], function (){
         Route::get('/home', [HomeController::class, 'index'])->name('home');
         Route::resource('categories', CategoryController::class);
+        Route::resource('bloggers', BloggerController::class)
+        ->only('index', 'destroy');
     });
 
 });
