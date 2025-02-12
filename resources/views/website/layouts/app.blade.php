@@ -26,10 +26,26 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index.html">Home</a></li>
-                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about.html">About</a></li>
-                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="post.html">Sample Post</a></li>
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ url('/') }}">Home</a></li>
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="#">About</a></li>
                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Contact</a></li>
+                @guest
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ route('website.login') }}">Login</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="post.html">Register</a></li>
+                @endguest
+                @auth
+                    @if(auth()->user()->isAdmin())
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ route('admin.home') }}">Dashboard</a></li>
+                    @endif
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ route('website.posts.create') }}">Create Post</a></li>
+                    <li class="nav-item">
+                        <a onclick="document.getElementById('logoutForm').submit()" class="nav-link px-lg-3 py-3 py-lg-4" href="#">Logout</a>
+                        <form action="{{ route('logout') }}" method="post" id="logoutForm">
+                            @csrf
+                        </form>
+                    </li>
+                @endauth
+
             </ul>
         </div>
     </div>

@@ -74,4 +74,15 @@ class User extends Authenticatable
     {
         return $query->where('role', UserRoleEnum::ADMIN->value);
     }
+
+    // methods [ isAdmin & isBlogger ]
+    public function isAdmin(): bool
+    {
+        return $this->role === UserRoleEnum::ADMIN->value;
+    }
+    public function isBlogger(): bool
+    {
+        return $this->role === UserRoleEnum::BLOGGER->value;
+    }
+
 }
