@@ -47,6 +47,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{url('admin/admins')}}" class="nav-link">
+                        <i class="nav-icon bi bi-palette"></i>
+                        <p>Admins</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="#" class="nav-link active">
                         <i class="nav-icon bi bi-speedometer"></i>
                         <p>
