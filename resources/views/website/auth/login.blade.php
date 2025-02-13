@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-sm-4 offset-sm-4">
                 <h3>Login</h3>
-                <form action="{{ route('website.submitLogin') }}" method="post">
+                <form action="{{ route(name: 'website.submitLogin') }}" method="post">
                     @csrf
                     <div class="input-group mb-3">
                         <input type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" name="email" value="{{ old('email') }}"/>
