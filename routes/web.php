@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BloggerController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Website\Auth\LoginController;
+use App\Http\Controllers\Website\Auth\RegisterController;
 use App\Http\Controllers\Website\HomeController as WebsiteHomeController;
 use App\Http\Controllers\Website\PostController;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +27,10 @@ Route::group(['as' => 'website.'], function (){
 
     Route::get('login', [LoginController::class, 'loginView'])->name('login')->middleware('guest');
     Route::post('login', [LoginController::class, 'login'])->name('submitLogin')->middleware('guest');
+
+    Route::get('register', [RegisterController::class, 'registerView'])->name('register')->middleware('guest');
+    Route::post('register', [RegisterController::class, 'register'])->name('submitRegister')->middleware('guest');
+
 });
 
 
