@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Admin\BloggerController;
 use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Website\HomeController as WebsiteHomeController;
 use App\Http\Controllers\Website\PostController;
@@ -31,7 +30,6 @@ Route::group(['prefix' => 'admin'], function (){
     Route::group(['as' => 'admin.', 'middleware' => ['auth', 'is-admin']], function (){
         Route::get('/home', [HomeController::class, 'index'])->name('home');
         Route::resource('categories', CategoryController::class);
-        Route::resource('tags', TagController::class);
         Route::resource('bloggers', BloggerController::class)
         ->only('index', 'destroy');
     });

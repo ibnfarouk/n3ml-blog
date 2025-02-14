@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Website\CreatePost;
+use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -21,15 +24,24 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        $tags = Tag::all();
+        return view('website.posts.create', compact('categories', 'tags'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreatePost $request)
     {
-        //
+        $post = $request->user()->posts()->create($request->except('tags'));
+        $post->tags()->attach($request->tags);
+        if ($request->hasFile('photo')) {
+            $request->file('photo')->storeAs('posts', $post->id . '.' . $request->file('photo')->extension(), 'public');
+            $post->photo = 'posts/' . $post->id . '.' . $request->file('photo')->extension();
+            $post->save();
+        }
+        return redirect()->route('website.home');
     }
 
     /**
