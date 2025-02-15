@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\UserRoleEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,7 +18,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->tinyInteger('role');// admin - blogger
+            $table->tinyInteger('role')->default(UserRoleEnum::BLOGGER->value);// admin - blogger
             $table->string('photo')->nullable();
             $table->rememberToken();
             $table->timestamps();

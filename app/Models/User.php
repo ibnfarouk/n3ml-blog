@@ -25,7 +25,6 @@ class User extends Authenticatable
         'email',
         'password',
         'photo',
-        'role',
     ];
 
     /**
@@ -46,6 +45,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        
     ];
 
     public function favourites(): MorphToMany

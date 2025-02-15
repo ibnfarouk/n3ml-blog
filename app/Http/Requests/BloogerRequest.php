@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Website;
-
+namespace App\Http\Requests;
+use App\Enums\UserRoleEnum;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreatePost extends FormRequest
+class BloogerRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,21 +22,22 @@ class CreatePost extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string', 'max:255'],
-            'content' => ['required', 'string'],
-            'category_id' => ['required', 'exists:categories,id'],
-            'tags' => ['required', 'array'],
-            'tags.*' => ['exists:tags,id'],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string','unique:users','email'],
+            'password' => ['required','string','min:8'],
             'photo' => ['nullable', 'image', 'max:2048'],
-            'published_at' => ['nullable',  'after_or_equal:now'],
         ];
     }
 
     protected function passedValidation()
     {
-        // set scheduled at to now() if null
-        if (is_null($this->published_at)) {
-            $this->merge(['published_at' => now()]);
+        // set role to blogger if null
+        if (is_null($this->role)) {
+          //  dd(vars: '1');
+
+            $this->merge(['role' => UserRoleEnum::BLOGGER->value]);
         }
     }
+
+
 }
