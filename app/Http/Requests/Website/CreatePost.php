@@ -28,7 +28,7 @@ class CreatePost extends FormRequest
             'tags' => ['required', 'array'],
             'tags.*' => ['exists:tags,id'],
             'photo' => ['nullable', 'image', 'max:2048'],
-            'published_at' => ['nullable', 'date_format:Y-m-d H:i:s', 'after_or_equal:now'],
+            'published_at' => ['nullable',  'after_or_equal:now'],
         ];
     }
 

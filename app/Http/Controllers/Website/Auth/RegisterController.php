@@ -17,9 +17,8 @@ class RegisterController extends Controller
 
     public function register(BloogerRequest $request)
     {
-        $user = User::create(array_merge($request->validated(), [
-            'role' => UserRoleEnum::BLOGGER->value
-        ]));
+      //  dd(vars: $request->all());
+        $user = User::create($request->validated());
 
         if ($request->hasFile('photo')) {
             $request->file('photo')->storeAs('posts', $user->id . '.' . $request->file('photo')->extension(), 'public');
